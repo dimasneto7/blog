@@ -2,8 +2,8 @@
 
 @section('header-intro')
     <h2>Buscar post</h2>
-    <form action="{{ route('home') }}" method="get">
-        <input type="text" name="s" id="" placeholder="Pesquisar posts" value={{ request()->input('s') ?? '' }}>
+    <form action="{{route('home')}}" method="get">
+        <input type="text" name="s" id="" placeholder="Pesquisar posts">
         <button type="submit" class="">Buscar</button>
     </form>
 @endsection
@@ -12,7 +12,7 @@
 <div class="container">
     <!--Section: Content-->
     <section class="text-center">
-    <h4 class="mb-5"><strong>Últimos posts</strong></h4>
+    <h4 class="mb-5"><strong>Posts ({{ $posts->total() }})</strong></h4>
 
     <div class="posts">
         @forelse ($posts as $post)
@@ -38,11 +38,9 @@
             <h2>Nenhum post foi encontrado</h2>
         @endforelse
     </div>
-    @if (request()->input('s'))
     <div class="d-flex justify-content-center">
-        {{ $posts->appends(['s' => request()->input('s')])->links() }}
+        {{ $posts->links() }}
     </div>
-    @endif
     </section>
     <!--Section: Content-->
 
