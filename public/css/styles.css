@@ -1,0 +1,14 @@
+.posts {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.post {
+    width: 40vw;
+    margin-bottom: 20px;
+}
+
+#content-post {
+    text-align: center;
+}
