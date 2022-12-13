@@ -12,7 +12,11 @@
 <div class="container">
     <!--Section: Content-->
     <section class="text-center">
-    <h4 class="mb-5"><strong>Últimos posts</strong></h4>
+    @if (request()->input('s'))
+        <h4 class="mb-5"><strong>Busca por: {{ request()->input('s') }} ({{ $posts->total() }})</strong></h4> posts</strong></h4>
+    @else
+        <h4 class="mb-5"><strong>Últimos posts</strong></h4>
+    @endif
 
     <div class="posts">
         @forelse ($posts as $post)

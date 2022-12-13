@@ -25,7 +25,7 @@
     {{ $errors->first('comment') }}
     <form action="{{ route('comment', $post->id) }}" method="post">
         @csrf
-        <input type="hidden" name="post_id" value="{{ $post->id }}">
+        {{-- <input type="hidden" name="post_id" value="{{ $post->id }}"> --}}
         <textarea name="comment" cols="30" rows="5"></textarea><br>
         <button type="submit">Comentar</button>
     </form>
