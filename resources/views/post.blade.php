@@ -10,4 +10,42 @@
     <p>{{ $post->content }}</p>
 </div>
 
+<hr>
+
+@if (auth()->check())
+
+@if (session()->has("error_create_comment"))
+    <span>{{ session()->get('error_create_comment') }}</span>
+@endif
+
+<div class="text-center">
+    <h3>
+        {{ $post->comments->count() }} comentários
+    </h3>
+    {{ $errors->first('comment') }}
+    <form action="{{ route('comment', $post->id) }}" method="post">
+        @csrf
+        <input type="hidden" name="post_id" value="{{ $post->id }}">
+        <textarea name="comment" cols="30" rows="5"></textarea><br>
+        <button type="submit">Comentar</button>
+    </form>
+</div>
+
+@endif
+
+<div class="text-center">
+    <ul id="comments">
+        @forelse ($post->comments as $comment)
+            <li>
+                {{ $comment->comment }} - Autor: {{ $comment->user->fullName }}
+                @if(auth()->check() && auth()->user()->id === $comment->user->id)
+                    <a href="{{ route('comment.destroy', $comment->id) }}">Deletar</a>
+                @endif
+            </li>
+        @empty
+            <li>Nenhum comentário para esse post</li>
+        @endforelse
+    </ul>
+</div>
+
 @endsection
